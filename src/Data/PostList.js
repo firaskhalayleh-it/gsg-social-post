@@ -15,8 +15,8 @@ const PostList = [
     date: "June 11, 2023",
     content:
       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
-    profile: "profile3.png",
-    image: "image3.png",
+    profile: "profile-picture.png",
+    image: "france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg",
     like: 102,
     comment: 55,
     comments: ["Comment X"],
@@ -36,8 +36,8 @@ const PostList = [
     date: "June 10, 2023",
     content:
       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    profile: "profile2.png",
-    image: "image2.png",
+    profile: "user.png",
+    image: "Best-of-2016-Nasim-Mansurov-20.jpg",
     like: 320,
     comment: 120,
     comments: [],

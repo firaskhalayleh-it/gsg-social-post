@@ -1,9 +1,39 @@
 import "./style.css";
-import React, { useState, useRef } from "react";
-
+import React, { useState } from "react";
 const Post = ({ post }) => {
+  const { content, like } = post;
+  const [Like, setLike] = useState(like);
+  const [comment, setComment] = useState("");
+  const [commentList, setCommentList] = useState([]);
+  const [commentnum , setCommentnum ] = useState(0)
+ 
+  const handleLikeClick = () => {
+    setLike((prevLike) => prevLike + 1);
+  };
+
+  const handleCommentSubmit = () => {
+   
+
+    if (comment.trim() === "") {
+      return;
+    }
+    setCommentnum((num)=>(num = num+1))
+
+    const newComment = {
+      text: comment,
+    };
+
+    const updatedComments = [...commentList, newComment];
+    setCommentList(updatedComments);
+    setComment("");
+  };
+
   return (
     <>
+    <div>
+    
+
+    </div>
       <div className="post-container">
         <div className="post-header">
           <img className="post-avatar" src={post.profile} alt="Avatar" />
@@ -12,44 +42,34 @@ const Post = ({ post }) => {
             <div className="post-date">{post.date}</div>
           </div>
         </div>
-        <div className="post-content">{post.content}</div>
+        <div className="post-content">{content}</div>
         <div className="post-image-container">
           <img className="post-image" src={post.image} alt="Post" />
         </div>
-        <div class="post-actions">
+        <div className="post-actions">
           <div>
-            <div
-              onClick={() => {
-                alert("write function to increase the Like ");
-              }}
-            >
-              Like : {post.like}
-            </div>
+            <div onClick={handleLikeClick}>Like: {Like}</div>
           </div>
           <div>
-            <div
-              onClick={() => {
-               
-              }}
-            >
-              Comment : {post.comment}
-            </div>
+            <div>Comment: {commentnum}</div>
           </div>
         </div>
       </div>
 
       <div className="post-container comments-post">
-        <div className="display-comments">
-          <div>
-            <img className="post-avatar" src={post.profile} alt="Avatar" />
+        {commentList.map((comment, index) => (
+          <div className="display-comments" key={index}>
+            <div>
+              <img className="post-avatar" src={post.profile} alt="Avatar" />
+            </div>
+            <div className="comment-form">
+              <h4>{comment.text}</h4>
+            </div>
           </div>
-          <div className="comment-form">
-            <h4>comment Text</h4>
-          </div>
-        </div>
+        ))}
       </div>
 
-      <div className="post-container comment-post">
+      <div className="post-container comment-post" id="comment">
         <div>
           <img className="post-avatar" src={post.profile} alt="Avatar" />
         </div>
@@ -58,8 +78,14 @@ const Post = ({ post }) => {
             className="comment-input"
             type="text"
             placeholder="Write a comment..."
+            value={comment}
+            onChange={(event) => setComment(event.target.value)}
           />
-          <button className="comment-button" type="button" onClick={() => {}}>
+          <button
+            className="comment-button"
+            type="button"
+            onClick={handleCommentSubmit}
+          >
             Submit
           </button>
         </div>
